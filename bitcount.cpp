@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iomanip>
 #include <bitset>
 
 constexpr int onecount(unsigned int i) {
