@@ -37,7 +37,7 @@ int main() {
     std::cout << "Enter number: ";
     std::cin >> num;
     if (!std::cin) {
-        std::cerr << "Not number \n";
+        std::cerr << "Not a number \n";
         std::cerr.flush();
         return -1;
     }
