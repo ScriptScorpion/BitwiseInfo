@@ -34,8 +34,11 @@ int whole_amount(unsigned int i) {
 int main() {
     int num = 0;
     printf("Enter number: ");
-    scanf("%d", &num);
+    int check = scanf("%d", &num);
+    if (check == 0) {
+        printf("Not a number \n");
+        return -1;
+    }
     printf("%b", num);
     printf(" returns %d units, %d zeros, and whole amount of bits %d \n", onecount(num), zerocount(num), whole_amount(num));  
 }
-
