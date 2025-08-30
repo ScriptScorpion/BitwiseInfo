@@ -1,5 +1,5 @@
 #include <iostream>
-#include <bitset>
+#include <cstdio>
 
 constexpr int onecount(unsigned int i) {
     int c = 0;
@@ -41,6 +41,6 @@ int main() {
         std::cerr.flush();
         return -1;
     }
-    std::cout << std::bitset<8>(num).to_string();
+    printf("%b", num);
     std::cout << " returns " << onecount(num) << " units, " << zerocount(num) << " zeros, and whole amount of bits " << whole_amount(num) <<  std::endl;  
 }
