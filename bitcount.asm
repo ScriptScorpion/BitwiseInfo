@@ -8,7 +8,6 @@ section .bss
     num: resb 10
 section .text
     global _start
-
 _start:
     ; Print prompt
     mov rax, 1          ; syscall: write
@@ -27,7 +26,7 @@ _start:
     mov rsi, num
     xor rax, rax
     xor rcx, rcx
-    call convert_loop
+    call convert_loop   ; convert to normal value
 
     mov rdi, [num]
     call std_print_num_dec
@@ -128,41 +127,32 @@ whole_amount:
     mov rax, rcx
     ret
 
-
-
 std_print_num_dec:
     push     rbx
-
     mov     rax, rdi 
     mov     rcx, 0xA 
-    
-    dec     rsp
+    dec     rsp ; leave space for new value
     mov     rbx, 0x1
-
 .loop:
     xor     rdx, rdx
     div     rcx 
-    
     inc     rbx
-
     add     dl, 0x30  
-    dec     rsp
+    dec     rsp ; leave space for new value
     mov     BYTE [rsp], dl
-    
     cmp     rax, 0x0
     jne     .loop
-    
+
     mov     rax, 1
     mov     rdi, 1
     mov     rsi, rsp
     mov     rdx, rbx
     syscall
     
-    add     rsp, rbx
-
+    add     rsp, rbx ; put stack into his original location
     pop     rbx
+    ret
 
-    ret 
 convert_loop:
     mov cl, [rsi]     
     cmp cl, 0x0A        
@@ -171,16 +161,16 @@ convert_loop:
     jb exit
     cmp cl, '9'
     ja exit
-    
     sub cl, '0'        
     imul rax, 10     
-    add rax, rcx
-    
+    add rax, rcx  
     inc rsi  
     jmp convert_loop
+
 .convert_done:
     mov [num], rax
     ret
+
 exit:
     mov rax, 60
     xor rdi, rdi
