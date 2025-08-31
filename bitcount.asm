@@ -157,10 +157,6 @@ convert_loop:
     mov cl, [rsi]     
     cmp cl, 0x0A        
     je .convert_done
-    cmp cl, '0'       
-    jb exit
-    cmp cl, '9'
-    ja exit
     sub cl, '0'        
     imul rax, 10     
     add rax, rcx  
